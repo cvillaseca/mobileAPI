@@ -16,7 +16,7 @@ internal class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     @Throws(Exception::class)
     override fun configure(auth: AuthenticationManagerBuilder) {
         auth.inMemoryAuthentication()
-            .withUser("cristian")
+            .withUser("user")
             .password(passwordEncoder().encode("1234"))
             .roles("USER")
     }
