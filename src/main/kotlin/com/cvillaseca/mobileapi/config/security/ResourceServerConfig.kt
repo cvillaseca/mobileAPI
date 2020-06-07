@@ -1,4 +1,4 @@
-package com.cvillaseca.mobileapi.config
+package com.cvillaseca.mobileapi.config.security
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -14,7 +14,8 @@ class ResourceServerConfig : ResourceServerConfigurerAdapter() {
             .formLogin().disable()
             .anonymous().disable()
             .authorizeRequests()
-            .antMatchers("/private/**").hasRole("USER")
-            .antMatchers("/public/**").authenticated()
+            .antMatchers("/admin/**").hasRole("ADMIN")
+            .antMatchers("/user/**").hasRole("USER")
+            .antMatchers("/signUp").authenticated()
     }
 }
