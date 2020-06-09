@@ -29,7 +29,8 @@ class UserService : UserDetailsService {
 
     @Throws(UsernameNotFoundException::class)
     override fun loadUserByUsername(username: String): UserDetails =
-        userDao.findOneByUsername(username)!!
+        userDao.findOneByUsername(username)
+            ?: throw UsernameNotFoundException("user not found")
 
     fun createUser(email: String, password: String): User? =
         if (userDao.findOneByUsername(email) == null) {
