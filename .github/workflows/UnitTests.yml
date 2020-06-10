@@ -19,8 +19,6 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Set up Gradle and run tests
-      uses: eskatos/gradle-command-action@v1
-      with:
-        gradle-version: 6.3
-        arguments: test
+
+    - name: Run tests
+      run: ./gradlew test
