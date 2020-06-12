@@ -5,6 +5,8 @@ plugins {
 	id("io.spring.dependency-management") version "1.0.9.RELEASE"
 	kotlin("jvm") version "1.3.72"
 	kotlin("plugin.spring") version "1.3.72"
+
+	id("io.gitlab.arturbosch.detekt").version("1.9.1")
 }
 
 group = "com.cvillaseca"
@@ -13,6 +15,7 @@ java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
 	mavenCentral()
+	jcenter()
 }
 
 dependencies {
@@ -33,6 +36,8 @@ dependencies {
 	}
 	testImplementation("org.springframework.security:spring-security-test")
 	testImplementation("com.ninja-squad:springmockk:2.0.1")
+
+	detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.9.1")
 }
 
 tasks.withType<Test> {
@@ -44,4 +49,11 @@ tasks.withType<KotlinCompile> {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
 		jvmTarget = "1.8"
 	}
+}
+
+detekt {
+	toolVersion = "1.9.1"
+	config = files("${rootProject.projectDir}/config/detekt/detekt.yml")
+	baseline = file("${rootProject.projectDir}/config/detekt/baseline.xml")
+	buildUponDefaultConfig = true
 }
