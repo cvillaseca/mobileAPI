@@ -6,7 +6,7 @@ plugins {
 	kotlin("jvm") version "1.3.72"
 	kotlin("plugin.spring") version "1.3.72"
 
-	id("io.gitlab.arturbosch.detekt").version("1.8.0")
+	id("io.gitlab.arturbosch.detekt").version("1.9.1")
 }
 
 group = "com.cvillaseca"
@@ -37,7 +37,7 @@ dependencies {
 	testImplementation("org.springframework.security:spring-security-test")
 	testImplementation("com.ninja-squad:springmockk:2.0.1")
 
-	detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.8.0")
+	detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.9.1")
 }
 
 tasks.withType<Test> {
@@ -51,37 +51,9 @@ tasks.withType<KotlinCompile> {
 	}
 }
 
-val detektAll by tasks.registering(io.gitlab.arturbosch.detekt.Detekt::class) {
-	description = "Runs over whole code base without the starting overhead for each module."
-	autoCorrect = true
-	parallel = true
-	setSource(files(projectDir))
-	include("**/*.kt")
-	include("**/*.kts")
-	exclude("**/resources/**")
-	exclude("**/build/**")
-	exclude("**/buildSrc/**")
-	exclude("**/test/**/*.kt")
-	config.setFrom(files("$rootDir/detekt/detekt.yml"))
-	baseline.set(file("$rootDir/detekt/baseline.xml"))
-	reports {
-		xml.enabled = false
-		html.enabled = false
-		txt.enabled = false
-	}
-}
-
-val detektProjectBaseline by tasks.registering(io.gitlab.arturbosch.detekt.DetektCreateBaselineTask::class) {
-	description = "Overrides current baseline."
-	ignoreFailures.set(true)
-	parallel.set(true)
-	setSource(files(rootDir))
-	config.setFrom(files("$rootDir/detekt/detekt.yml"))
-	baseline.set(file("$rootDir/detekt/baseline.xml"))
-	include("**/*.kt")
-	include("**/*.kts")
-	exclude("**/resources/**")
-	exclude("**/build/**")
-	exclude("**/buildSrc/**")
-	exclude("**/test/**/*.kt")
+detekt {
+	toolVersion = "1.9.1"
+	config = files("${rootProject.projectDir}/config/detekt/detekt.yml")
+	baseline = file("${rootProject.projectDir}/config/detekt/baseline.xml")
+	buildUponDefaultConfig = true
 }
