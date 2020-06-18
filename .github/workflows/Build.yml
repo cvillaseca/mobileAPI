@@ -16,10 +16,10 @@ jobs:
 
       - uses: actions/cache@v2
           with:
-           path: ~/.gradle
-           key: ${{ runner.os }}-gradle-${{ hashFiles('build.gradle.kts') }}-${{ hashFiles('buildSrc/src/main/java/Dependencies.kt') }}-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
-           restore-keys: |
-             ${{ runner.os }}-gradle-
+            path: ~/.gradle
+            key: ${{ runner.os }}-gradle-${{ hashFiles('build.gradle.kts') }}-${{ hashFiles('buildSrc/src/main/java/Dependencies.kt') }}-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+            restore-keys: |
+              ${{ runner.os }}-gradle-
 
       - name: Run detekt
         run: ./gradlew detekt
