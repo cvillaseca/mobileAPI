@@ -19,4 +19,10 @@ This repository is part of a series of tutorials:
 
 There is a [postman configuration](./doc/postman/MobileAPI.postman_collection.json)
  that you can import and start testing the web services.
+ 
+ ### Gradle tasks
+```
+./gradlew detektAll //Code analysis.
+./gradlew checkDependencyUpdates //Check dependency updates.
+```
 
