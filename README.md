@@ -22,7 +22,7 @@ There is a [postman configuration](./doc/postman/MobileAPI.postman_collection.js
  
  ### Gradle tasks
 ```
-./gradlew detektAll //Code analysis.
+./gradlew detekt //Code analysis.
 ./gradlew checkDependencyUpdates //Check dependency updates.
 ```
 
